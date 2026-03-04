@@ -15,7 +15,7 @@ void noarg(){
     cout << "Enter search string: ";
     cin >> pattern;
 
-    if (line.find(pattern) != std::string::npos) {
+    if (line.find(pattern) != string::npos) {
         cout << pattern << " found in " << line;
     } else {
         cout << pattern << " NOT found in " << line;
