@@ -5,13 +5,29 @@
 
 using namespace std;
 
+void noarg(){
+
+    string line;
+    cout << "Enter string from which to search for: ";
+    cin >> line;
+    
+    string pattern;
+    cout << "Enter search string: ";
+    cin >> pattern;
+
+    if (line.find(pattern) != std::string::npos) {
+        cout << pattern << " found in " << line;
+    } else {
+        cout << pattern << " NOT found in " << line;
+    }
+    
+}
+
 int main(int argc, char *argv[]){
 
     if (argc < 3) {
-        cerr << "Usage: " << argv[0] << " <pattern> <file | ->\n"
-            << "  <pattern> : text to search for\n"
-            << "  <file>    : path to input file";
-        return (1);
+        noarg();
+        return(0);
     }
     
     string pattern = argv[1]; // Haluttu teksti tai merkki jota haetaan
@@ -42,4 +58,3 @@ int main(int argc, char *argv[]){
     return(0);
     
 }
-
