@@ -4,10 +4,10 @@
 
 using namespace std;
 
-void noarg(){
+void noarg(){ // Funktio, jolla tehdään merkkijonon haku käyttäjän syötteestä
 
     string line;
-    while (line.empty()) {
+    while (line.empty()) { // Looppi, jota toistetaan kunnes jokin tekstilähde syötetään
         cout << "Give string from which to search for: ";
         getline(cin, line);
         if (line.empty()==true)
@@ -17,7 +17,7 @@ void noarg(){
     }
     
     string pattern;
-    while (pattern.empty()) {
+    while (pattern.empty()) { // Looppi, jota toistetaan kunnes haettava merkkijono syötetään
         cout << "Give search string: ";
         getline(cin, pattern);
         if (pattern.empty()==true)
@@ -26,28 +26,28 @@ void noarg(){
         }
     }
 
-    if (line.find(pattern) != string::npos) {
-        cout << pattern << " found in " << line << " at position " << line.find(pattern);
+    if (line.find(pattern) != string::npos) { // if-lause, jolla määritetään löytyykö merkkijono tekstilähteestä.
+        cout <<"\"" << pattern << "\" found in \"" << line <<"\"" << " at position " << line.find(pattern);
     } else {
-        cout << pattern << " NOT found in " << line;
+        cout << "\"" <<  pattern << "\" NOT found in \"" << line << "\"";
     }
     
 }
 
-void arg(string v_pattern, string v_filename){
+void arg(string v_pattern, string v_filename){ // Funktio, jolla tehdään merkkijonon haku mikäli lähteenä on tiedosto
 
     string line;
 
-    ifstream file;
-    file.open(v_filename);
+    ifstream file; // avattaan tiedosto
+    file.open(v_filename); // Tarkistetaan onko tiedosto auki
     if (!file) {
         cerr << "Error - Could not open file: " << v_filename;
-    } else if (v_pattern.empty()) {
+    } else if (v_pattern.empty()) { // Tarkistetaan onko haettava merkkijono tyhjä
         cerr << "Error - Empty pattern";
     } else {
         istream* in = &file;
 
-        int matchCount = 0;
+        int matchCount = 0; 
         while (getline(*in, line)) {
             if (line.find(v_pattern) != string::npos) {
                 std::cout << line << '\n';
@@ -56,14 +56,14 @@ void arg(string v_pattern, string v_filename){
         }
 
         if (matchCount == 0) {
-            cout << v_pattern << " was NOT found in " << v_filename;
+            cout << "\"" << v_pattern << "\" was NOT found in \"" << v_filename << "\"";
         }
     }
 }
 
-int main(int argc, char *argv[]){
+int main(int argc, char *argv[]){ // Pääfunktio 
 
-    switch (argc) {
+    switch (argc) { // Switch-lause, jolla määritetään mikä aliohjelista haetaan ja millä ohjelma terminoidaan huonon promptin sattuessa
     case 1:
     {
         noarg();
