@@ -1,7 +1,7 @@
 # mygrep_utility
 This repo includes project files for a clone of the linux GREP-tool done as part of a school project
 
-**Repository contents**
+**REPOSITORY CONTENTS**
 
 This repository includes the following files :
 - .gitignore - used the ignore unwanted files in local repository
