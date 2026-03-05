@@ -34,6 +34,33 @@ void noarg(){
     
 }
 
+void arg(string v_pattern, string v_filename){
+
+    string line;
+
+    ifstream file;
+    file.open(v_filename);
+    if (!file) {
+        cerr << "Error - Could not open file: " << v_filename;
+    } else if (v_pattern.empty()) {
+        cerr << "Error - Empty pattern";
+    } else {
+        istream* in = &file;
+
+        int matchCount = 0;
+        while (getline(*in, line)) {
+            if (line.find(v_pattern) != string::npos) {
+                std::cout << line << '\n';
+                matchCount++;
+            }
+        }
+
+        if (matchCount == 0) {
+            cout << v_pattern << " was NOT found in " << v_filename;
+        }
+    }
+}
+
 int main(int argc, char *argv[]){
 
     switch (argc) {
@@ -44,26 +71,7 @@ int main(int argc, char *argv[]){
     }   
     case 3:
     {
-        string pattern = argv[1]; // Haluttu teksti tai merkki jota haetaan
-        string fileLocation = argv[2]; // Tiedosto tai sijainti jota luetaan
-        string line;
-
-        ifstream file;
-        file.open(fileLocation);
-        istream* in = &file;
-
-        int matchCount = 0;
-        while (getline(*in, line)) {
-            if (line.find(pattern) != string::npos) {
-                std::cout << line << '\n';
-                matchCount++;
-            }
-        }
-
-        if (matchCount == 0) {
-            cout << pattern << " was NOT found in " << fileLocation;
-        }
-
+        arg(argv[1], argv[2]);
         return(0);
     }
     default:
